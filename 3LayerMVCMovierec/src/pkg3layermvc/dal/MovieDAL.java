@@ -39,7 +39,12 @@ public class MovieDAL {
                 break;
             }
             else{
-            System.out.println(br.readLine());
+                String[] splitString = alineoftext.split(",");
+               
+                
+             
+            //System.out.println(alineoftext.substring(0, alineoftext.indexOf(",")));
+            //System.out.println(alineoftext.substring(alineoftext.indexOf(","), alineoftext.indexOf(",", alineoftext.indexOf(","))));
             }
             
         }
