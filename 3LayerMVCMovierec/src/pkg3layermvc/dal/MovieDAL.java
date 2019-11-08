@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -83,28 +85,53 @@ public class MovieDAL {
     return m;
     
     }
-    /*
-    public void removeFromList(int id) throws IOException{
-        try(BufferedReader reader =new BufferedReader(new FileReader(new File(MOVIE_SOURCE))), BufferedWriter writer = new BufferedWriter(new FileWriter())) {
+    
+        public void deleteMovie(Movie movie) 
+    {
+        try
+        {
+            File file = new File(MOVIE_SOURCE);
+            List<Movie> movies = getAllMovies();
+            OutputStream os = Files.newOutputStream(file.toPath(), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+            try ( BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os)))
+            {
+                for (Movie mov : movies)
+                {
+                    if (mov.getId() != movie.getId())
+                    {
+                        String line = mov.getId() + "," + mov.getYear() + "," + mov.getTitle();
+                        bw.write(line);
+                        bw.newLine();
+                    }
+                    else{
+                        System.out.println(mov);
+                        System.out.println("shit");
+                    }
+                }
+            }
+        } catch (IOException ex)
+        {
             
-        } catch (Exception e) {
         }
-    
-    
     }
-    */
+    
     public static void main(String[] args) throws FileNotFoundException, IOException {
         MovieDAL dal = new MovieDAL();
-        
+        /*
+        System.out.println(dal.getAllMovies().get(0));
+        System.out.println();
+        */
+        dal.deleteMovie(dal.getAllMovies().get(0));
         dal.getAllMovies();
-       
         
+        
+    /*    
         for (Movie movie : dal.getAllMovies()) {
             
             System.out.println(movie);
             
         }
-       
+       */
         
     }
    
