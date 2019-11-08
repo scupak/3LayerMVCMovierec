@@ -26,40 +26,77 @@ public class MovieDAL {
     
     
     public List<Movie> getAllMovies() throws FileNotFoundException, IOException{
+         
+         
+        // ArrayList<Movie> movies = new ArrayList<>();
+         
+        try(BufferedReader br = 
+                new BufferedReader(
+                new FileReader(
+                new File(MOVIE_SOURCE))))
+        {
         ArrayList<Movie> movies = new ArrayList<>();
-        File file = new File(MOVIE_SOURCE);
-        
-        FileReader fr = new FileReader(file);
-        BufferedReader br =  new BufferedReader(fr);
-       
-        while (true) {            
-            
-            String alineoftext = br.readLine();
-            if (alineoftext == null) {
-                break;
-            }
-            else{
-                String[] splitString = alineoftext.split(",");
+        String alineoftekst;
+        while ((alineoftekst = br.readLine()) != null) {            
                
+              Movie movie = stringToMovie(alineoftekst);
+          
+                movies.add(movie);
                 
-             
+               
             //System.out.println(alineoftext.substring(0, alineoftext.indexOf(",")));
             //System.out.println(alineoftext.substring(alineoftext.indexOf(","), alineoftext.indexOf(",", alineoftext.indexOf(","))));
-            }
             
+            
+        }
+        return movies;
+        }
+        finally{
+      
         }
         
         
+    }
+    private Movie stringToMovie(String text){
         
-        return null;
+         int id;
+         int year;
+      
+        String[] splitString = text.split(",");
+                
+                 id = Integer.parseInt(splitString[0]);
+                 //ch
+                if(!splitString[1].equalsIgnoreCase("NULL")){ 
+                    
+                     year = Integer.parseInt(splitString[1]);
+                } else {
+                     year = -1;
+                    }
+               
+                
+                //System.out.println(Integer.parseInt(splitString[1]));
+                
+        String title = splitString[2];
+               
+        Movie m = new Movie(id, year, title);
+        
+    
+    return m;
+    
     }
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
         MovieDAL dal = new MovieDAL();
         
+        dal.getAllMovies();
+       
         
-            dal.getAllMovies();
-        
+        for (Movie movie : dal.getAllMovies()) {
+            
+            System.out.println(movie);
+            
+        }
+       
         
     }
    

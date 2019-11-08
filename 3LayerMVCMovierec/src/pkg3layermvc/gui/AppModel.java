@@ -5,6 +5,7 @@
  */
 package pkg3layermvc.gui;
 
+import java.io.IOException;
 import pkg3layermvc.be.Movie;
 import pkg3layermvc.bll.BllManager;
 import javafx.collections.FXCollections;
@@ -18,7 +19,7 @@ public class AppModel {
    private BllManager bll =  new BllManager();
     private ObservableList<Movie> inmates = FXCollections.observableArrayList();
     
-    public void fetchData(){
+    public void fetchData() throws IOException{
     
     inmates.clear();
     inmates.addAll(bll.getAllMovies());

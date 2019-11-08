@@ -5,9 +5,11 @@
  */
 package pkg3layermvc.bll;
 
+import java.io.IOException;
 import pkg3layermvc.be.Movie;
 import pkg3layermvc.dal.MovieMockManager;
 import java.util.List;
+import pkg3layermvc.dal.MovieDAL;
 
 /**
  *
@@ -15,10 +17,11 @@ import java.util.List;
  */
 public class BllManager {
     MovieMockManager manager = new MovieMockManager();
+    MovieDAL dalmanager = new MovieDAL();
     
-    public List<Movie>getAllMovies(){
+    public List<Movie>getAllMovies() throws IOException{
     
-     return manager.getAllMovies();
+     return dalmanager.getAllMovies();
     
     
     }

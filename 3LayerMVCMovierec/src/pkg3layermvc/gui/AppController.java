@@ -7,6 +7,7 @@ package pkg3layermvc.gui;
  */
 
 
+import java.io.IOException;
 import pkg3layermvc.be.Movie;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +42,7 @@ public class AppController implements Initializable {
     }    
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) throws IOException {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
         model.fetchData();
