@@ -35,6 +35,8 @@ public class AppController implements Initializable {
     private ListView<Movie> inmateList;
 
     private AppModel model = new AppModel();
+    @FXML
+    private Button RemoveSelected;
     /**
      * Initializes the controller class.
      */
@@ -52,6 +54,15 @@ public class AppController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void RemoveSelected(ActionEvent event) {
+        
+        inmateList.getItems().remove(inmateList.getSelectionModel().getSelectedIndex());
+        
+        inmateList.getSelectionModel().getSelectedItem().getId();
+        
     }
     
 }

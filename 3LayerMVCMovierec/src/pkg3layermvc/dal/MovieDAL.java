@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,6 @@ public class MovieDAL {
         finally{
       
         }
-        
-        
     }
     private Movie stringToMovie(String text){
         
@@ -84,7 +83,16 @@ public class MovieDAL {
     return m;
     
     }
+    /*
+    public void removeFromList(int id) throws IOException{
+        try(BufferedReader reader =new BufferedReader(new FileReader(new File(MOVIE_SOURCE))), BufferedWriter writer = new BufferedWriter(new FileWriter())) {
+            
+        } catch (Exception e) {
+        }
     
+    
+    }
+    */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         MovieDAL dal = new MovieDAL();
         
