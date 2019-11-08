@@ -11,6 +11,8 @@ import java.io.IOException;
 import pkg3layermvc.be.Movie;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,10 +44,14 @@ public class AppController implements Initializable {
     }    
 
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
+    private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
-        model.fetchData();
+        try {
+            model.fetchData();
+        } catch (IOException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
