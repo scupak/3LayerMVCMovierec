@@ -19,6 +19,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -28,13 +31,13 @@ import javafx.scene.control.ListView;
 public class AppController implements Initializable {
 
     @FXML
-    private Button button;
-    @FXML
     private Label label;
     @FXML
     private ListView<Movie> inmateList;
 
     private AppModel model = new AppModel();
+    @FXML
+    private Button button;
     @FXML
     private Button RemoveSelected;
     /**
@@ -59,10 +62,14 @@ public class AppController implements Initializable {
     @FXML
     private void RemoveSelected(ActionEvent event) {
         
-        inmateList.getItems().remove(inmateList.getSelectionModel().getSelectedIndex());
+       
         
-        inmateList.getSelectionModel().getSelectedItem().getId();
+   
+        model.deleteMovie(inmateList.getSelectionModel().getSelectedItem());
         
+        System.out.println(inmateList.getSelectionModel().getSelectedItem());
+         inmateList.getItems().remove(inmateList.getSelectionModel().getSelectedIndex());
     }
+
     
 }

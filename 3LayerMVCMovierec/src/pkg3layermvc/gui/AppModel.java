@@ -31,6 +31,14 @@ public class AppModel {
         return inmates;
     }
     
+    public void deleteMovie(Movie movie){
+    
+    bll.deleteMovie(movie);
+    
+    
+    
+    }
+    
    
     
     

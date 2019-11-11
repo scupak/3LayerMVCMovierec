@@ -25,5 +25,12 @@ public class BllManager {
     
     
     }
+    public void deleteMovie(Movie movie){
+    
+    dalmanager.deleteMovie(movie);
+    
+    
+    
+    }
     
 }

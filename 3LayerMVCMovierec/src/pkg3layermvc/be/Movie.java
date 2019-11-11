@@ -5,11 +5,13 @@
  */
 package pkg3layermvc.be;
 
+import java.io.Serializable;
+
 /**
  *
  * @author pgn
  */
-public class Movie
+public class Movie implements Serializable
 {
 
     private final int id;
@@ -53,6 +55,30 @@ public class Movie
     {
         return "Movie{" + "id=" + id + ", title=" + title + ", year=" + year + '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        
+        if(obj instanceof Movie){
+            
+            
+            Movie other = (Movie) obj;
+            
+            return (this.id == other.getId());
+        
+        
+        }
+        else{
+        
+        return super.equals(obj);
+        
+        
+        }
+        
+    }
+    
+    
+    
     
     
 

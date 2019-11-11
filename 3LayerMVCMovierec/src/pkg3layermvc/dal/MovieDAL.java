@@ -114,8 +114,62 @@ public class MovieDAL {
             
         }
     }
+        
+          public void updateMovie(Movie movie) 
+    {
+        try
+        {
+            File file = new File(MOVIE_SOURCE);
+            List<Movie> movies = getAllMovies();
+            OutputStream os = Files.newOutputStream(file.toPath(), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+            
+                    try ( BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os)))
+                    {
+                        if(movies.remove(movie)){
+                            
+                            movies.add(movie);
+
+                                for (Movie mov : movies)
+                                {
+                                        String line = mov.getId() + "," + mov.getYear() + "," + mov.getTitle();
+                                        bw.write(line);
+                                        bw.newLine();
+                                }
+                        }
+                    }
+                    
+        } catch (IOException ex)
+        {
+            
+        }
+    }
+          public void writeAllMovies(List<Movie> allMovies, String filename) throws IOException, ClassNotFoundException{
+          
+          File listFile = new File(filename);
+          
+              try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(listFile))) {
+                  
+                  oos.writeObject(allMovies);
+                  oos.flush();
+              } 
+          
+               try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(listFile))) {
+                  
+                  List<Movie> sameListAsMovie = (List<Movie>) ois.readObject();
+                  
+                   for (Movie movie : sameListAsMovie) {
+                       
+                       System.out.println(movie);
+                       
+                   }
+              } 
+          
+          
+          }
     
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+
+    
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         MovieDAL dal = new MovieDAL();
         /*
         System.out.println(dal.getAllMovies().get(0));
@@ -124,6 +178,7 @@ public class MovieDAL {
         dal.deleteMovie(dal.getAllMovies().get(0));
         dal.getAllMovies();
         
+        dal.writeAllMovies(dal.getAllMovies(), "data/movie_objects.txt");
         
     /*    
         for (Movie movie : dal.getAllMovies()) {
