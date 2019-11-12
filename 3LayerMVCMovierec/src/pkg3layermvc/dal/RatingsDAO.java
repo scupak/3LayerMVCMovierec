@@ -48,4 +48,33 @@ public class RatingsDAO {
         }
         
     }
+    
+    public int GetRating(int userId, int movieId) throws FileNotFoundException, IOException{
+    
+        File ratingsSource = new File(RATING_SOURCE);
+        
+        try(RandomAccessFile raf = new RandomAccessFile(ratingsSource, "r")) {
+            
+            for (int i = 0; i < raf.length(); i += 12) {
+                
+                
+               raf.seek(i);
+               int mvid = raf.readInt();
+               int usId = raf.readInt();
+                if (userId==usId && mvid==movieId) {
+                    
+                    return raf.readInt();
+                    
+                }
+                
+            }
+            
+        }
+        throw new IllegalArgumentException("no rating found for userid" + userId + "and movieId" + movieId);
+        
+    
+    
+    
+    
+    }
 }
